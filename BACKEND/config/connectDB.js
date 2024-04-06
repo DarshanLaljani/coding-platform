@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');
 dotenv.config();
+
 const connectDB = async () => {
     try {
         // mongodb connection string
@@ -12,4 +13,4 @@ const connectDB = async () => {
     }
 }
 
-export { connectDB }
+module.exports = connectDB;

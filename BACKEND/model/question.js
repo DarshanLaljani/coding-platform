@@ -1,0 +1,30 @@
+const mongoose = require('mongoose');
+
+const codingQuestionSchema = new mongoose.Schema({
+    questionName: {
+        type: String,
+        required: true
+    },
+    difficultyLevel: {
+        type: String,
+        enum: ['easy', 'medium', 'hard'],
+        required: true
+    },
+    url: {
+        type: String,
+        required: true
+    },
+    conceptType: {
+        type: String,
+        required: true
+    },
+    createdBy: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User',
+        required: true
+    }
+});
+
+const CodingQuestion = mongoose.model('CodingQuestion', codingQuestionSchema);
+
+module.exports = CodingQuestion;
