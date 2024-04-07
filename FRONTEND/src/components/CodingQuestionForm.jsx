@@ -1,7 +1,12 @@
 import React, { useState } from 'react';
-import '../css/question.css';
+import axios from 'axios';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function CodingQuestionForm() {
+    const [successMessage, setSuccessMessage] = useState('');
+    const [error, setErrorMessage] = useState('');
+
     // State to store form data
     const [formData, setFormData] = useState({
         questionName: '',
@@ -20,32 +25,61 @@ function CodingQuestionForm() {
     };
 
     // Function to handle form submission
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        // Handle form submission (e.g., send data to server or store locally)
-        console.log(formData);
-        // You can add additional logic here
+
+        try {
+            // Send form data to the backend API
+            const response = await axios.post('http://localhost:5000/api/codingQuestions', formData);
+
+            // If the request is successful, show a toast notification
+            if (response.status === 200) {
+                setSuccessMessage("Data Saved Successfully")
+                // Clear success message after 2 seconds
+                setTimeout(() => {
+                    setSuccessMessage('');
+                }, 2000);
+            }
+            // You can reset the form fields here if needed
+            setFormData({
+                questionName: '',
+                difficultyLevel: '',
+                url: '',
+                conceptType: ''
+            });
+        } catch (error) {
+            // If there's an error, show an error toast notification
+            setErrorMessage("Failed to save data")
+            // Clear success message after 2 seconds
+            setTimeout(() => {
+                setErrorMessage('');
+            }, 2000);
+
+        }
     };
 
     return (
-        <div>
-            <h2>Coding Question Form</h2>
-            <form onSubmit={handleSubmit}>
-                <div>
-                    <label>
-                        Question Name:
+        <div className="flex justify-center items-center h-screen bg-gradient-to-r from-blue-400 to-yellow-500">
+            <div className="bg-white bg-opacity-20 p-10 rounded-lg shadow-lg">
+                {error && <p className="mb-2 text-center text-red-600 text-lg font-bold">{error}</p>}
+                {successMessage && <p className="mb-2 text-center text-green-600 text-lg font-bold">{successMessage}</p>}
+                <h2 className="text-5xl font-bold mb-4 text-center text-white">Coding Question Form</h2>
+
+                <form onSubmit={handleSubmit}>
+                    <div className="mb-4">
+                        <label className="block text-white">Question Name:</label>
                         <input
+                            className="w-full px-3 py-2 border rounded-md outline-none"
                             type="text"
                             name="questionName"
                             value={formData.questionName}
                             onChange={handleChange}
                         />
-                    </label>
-                </div>
-                <div>
-                    <label>
-                        Difficulty Level:
+                    </div>
+                    <div className="mb-4">
+                        <label className="block text-white">Difficulty Level:</label>
                         <select
+                            className="w-full px-3 py-2 border rounded-md outline-none"
                             name="difficultyLevel"
                             value={formData.difficultyLevel}
                             onChange={handleChange}
@@ -55,32 +89,33 @@ function CodingQuestionForm() {
                             <option value="medium">Medium</option>
                             <option value="hard">Hard</option>
                         </select>
-                    </label>
-                </div>
-                <div>
-                    <label>
-                        URL:
+                    </div>
+                    <div className="mb-4">
+                        <label className="block text-white">URL:</label>
                         <input
+                            className="w-full px-3 py-2 border rounded-md outline-none"
                             type="url"
                             name="url"
                             value={formData.url}
                             onChange={handleChange}
                         />
-                    </label>
-                </div>
-                <div>
-                    <label>
-                        Concept Type:
+                    </div>
+                    <div className="mb-4">
+                        <label className="block text-white">Concept Type:</label>
                         <input
+                            className="w-full px-3 py-2 border rounded-md outline-none"
                             type="text"
                             name="conceptType"
                             value={formData.conceptType}
                             onChange={handleChange}
                         />
-                    </label>
-                </div>
-                <button type="submit">Submit</button>
-            </form>
+                    </div>
+                    <div className="mb-4 flex justify-center">
+                        <button className="w-60 py-2 bg-blue-500 hover:bg-blue-600 text-white rounded-md transition duration-300" type="submit">Submit</button>
+                    </div>
+                    {/* <button className="w-60 py-2 bg-blue-500 hover:bg-blue-600 text-white rounded-md transition duration-300" type="submit">Submit</button> */}
+                </form>
+            </div>
         </div>
     );
 }

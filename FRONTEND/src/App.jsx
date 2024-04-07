@@ -5,6 +5,8 @@ import DisplayTable from "./components/DisplayTable";
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Home from "./components/Home";
 import Title from "./components/Title";
+import SignIn from "./components/Signin";
+import SignUp from "./components/Signup";
 
 function App() {
   return (
@@ -15,8 +17,8 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/practice" element={<CodeEditor />} />
-          <Route path="/login" element={<CodeEditor />} />
-          <Route path="/register" element={<CodeEditor />} />
+          <Route path="/login" element={<SignIn />} />
+          <Route path="/register" element={<SignUp />} />
           <Route path="/aboutus" element={<CodeEditor />} />
           <Route path="/addquestion" element={<CodingQuestionForm />} />
           <Route path="/questionbank" element={<DisplayTable />} />

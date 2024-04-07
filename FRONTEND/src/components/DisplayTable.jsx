@@ -1,12 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import 'tailwindcss/tailwind.css';
 
 function CodingQuestionForm() {
-    const [questions, setQuestions] = useState([
-        { id: 1, questionName: 'Question 1', difficultyLevel: 'easy', url: 'https://example.com/1', conceptType: 'Array' },
-        { id: 2, questionName: 'Question 2', difficultyLevel: 'medium', url: 'https://example.com/2', conceptType: 'String' },
-        { id: 3, questionName: 'Question 3', difficultyLevel: 'hard', url: 'https://example.com/3', conceptType: 'Sorting' }
-    ]);
+    const [questions, setQuestions] = useState([]);
     const [editingQuestion, setEditingQuestion] = useState(null);
     const [formData, setFormData] = useState({
         questionName: '',
@@ -14,6 +11,20 @@ function CodingQuestionForm() {
         url: '',
         conceptType: ''
     });
+
+    useEffect(() => {
+        // Fetch data from the API endpoint
+        const fetchData = async () => {
+            try {
+                const response = await axios.get('http://localhost:5000/api/getallquestion');
+                setQuestions(response.data); // Assuming response.data is an array of questions
+            } catch (error) {
+                console.error('Error fetching data:', error);
+            }
+        };
+
+        fetchData(); // Call the fetchData function when the component mounts
+    }, []); // Empty dependency array ensures this effect runs only once when the component mounts
 
     const handleEdit = (question) => {
         setEditingQuestion(question);

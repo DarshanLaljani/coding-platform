@@ -9,7 +9,7 @@ import List from '@mui/material/List';
 import Typography from '@mui/material/Typography';
 import Divider from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton';
-import Badge from '@mui/material/Badge';
+import { useNavigate } from 'react-router-dom'; // Import useHistory hook
 import Container from '@mui/material/Container';
 import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
@@ -19,6 +19,7 @@ import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import MainListItems from './listItems';
 import { Button } from '@mui/material';
 import ProfileSection from "./ProfileSection";
+
 
 const theme = createTheme({
   palette: {
@@ -77,14 +78,22 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
 );
 
 export default function Home() {
+  const navigateTo = useNavigate(); // Initialize useHistory
+
+  // Function to handle "Practice" button click
+  const handleLogin = () => {
+    // Navigate to the '/practice' route
+    navigateTo('/login');
+  };
+
+  const handleRegister = () => {
+    // Navigate to the '/practice' route
+    navigateTo('/register');
+  };
   const [open, setOpen] = React.useState(true);
 
   const toggleDrawer = () => {
     setOpen(!open);
-  };
-
-  const handleLogout = () => {
-    console.log('Logged out');
   };
 
   return (
@@ -126,8 +135,8 @@ export default function Home() {
             </Box>
             <Box sx={{ display: 'flex', alignItems: 'center' }}>
               <Button sx={{ marginRight: '8px' }}>About Us</Button>
-              <Button sx={{ bgcolor: '#6A1B9A', marginRight: '8px' }} color="inherit">Log In</Button>
-              <Button sx={{ borderColor: '#6A1B9A', color: '#6A1B9A', marginRight: '8px' }} variant="outlined">Sign Up</Button>
+              <Button onClick={handleLogin} sx={{ bgcolor: '#6A1B9A', marginRight: '8px' }} color="inherit">Log In</Button>
+              <Button onClick={handleRegister} sx={{ borderColor: '#6A1B9A', color: '#6A1B9A', marginRight: '8px' }} variant="outlined">Sign Up</Button>
             </Box>
           </Toolbar>
         </AppBar>

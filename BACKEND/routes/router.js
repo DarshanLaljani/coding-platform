@@ -15,7 +15,7 @@ router.get('/getallquestion', authenticateUser, getAllQuestions);
 router.post('/register', userController.registerUser);
 
 // Login
-router.get('/login', userController.loginUser);
+router.get('/login', authenticateUser, userController.loginUser);
 
 // Get User Profile
 router.get('/profile', userController.getUserProfile);

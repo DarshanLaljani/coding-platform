@@ -7,7 +7,6 @@ const codingQuestionSchema = new mongoose.Schema({
     },
     difficultyLevel: {
         type: String,
-        enum: ['easy', 'medium', 'hard'],
         required: true
     },
     url: {
@@ -21,7 +20,7 @@ const codingQuestionSchema = new mongoose.Schema({
     createdBy: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User',
-        required: true
+        // required: true
     }
 });
 

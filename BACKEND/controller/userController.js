@@ -25,6 +25,7 @@ exports.registerUser = async (req, res) => {
         email: req.body.email,
         password: hashedPassword
     });
+    console.log(newUser);
 
     // Save the user to the database
     await newUser.save();

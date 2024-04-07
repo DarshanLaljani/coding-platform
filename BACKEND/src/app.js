@@ -1,12 +1,17 @@
 const express = require('express');
 const dotenv = require('dotenv');
+const cors = require('cors');
 dotenv.config();
 
 const connectDB = require('../config/connectDB');
 
 const app = express();
+`   `
+// Enable CORS middleware
+app.use(cors());
 
 connectDB();
+
 
 app.get("/", (req, res) => {
     res.send("Hello World");
