@@ -90,6 +90,11 @@ export default function Home() {
     // Navigate to the '/practice' route
     navigateTo('/register');
   };
+
+  const handleLogout = () => {
+    // Navigate to the '/practice' route
+    navigateTo('/logout');
+  };
   const [open, setOpen] = React.useState(true);
 
   const toggleDrawer = () => {
@@ -137,6 +142,7 @@ export default function Home() {
               <Button sx={{ marginRight: '8px' }}>About Us</Button>
               <Button onClick={handleLogin} sx={{ bgcolor: '#6A1B9A', marginRight: '8px' }} color="inherit">Log In</Button>
               <Button onClick={handleRegister} sx={{ borderColor: '#6A1B9A', color: '#6A1B9A', marginRight: '8px' }} variant="outlined">Sign Up</Button>
+              <Button onClick={handleLogout} sx={{ borderColor: '#6A1B9A', color: '#6A1B9A', marginRight: '8px' }} variant="outlined">Logout</Button>
             </Box>
           </Toolbar>
         </AppBar>

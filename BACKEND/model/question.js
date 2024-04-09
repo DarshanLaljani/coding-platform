@@ -19,8 +19,8 @@ const codingQuestionSchema = new mongoose.Schema({
     },
     createdBy: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'User',
-        // required: true
+        ref: 'User', // Reference to the User model
+        required: true
     }
 });
 

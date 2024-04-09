@@ -16,7 +16,7 @@ function CodingQuestionForm() {
         // Fetch data from the API endpoint
         const fetchData = async () => {
             try {
-                const response = await axios.get('http://localhost:5000/api/getallquestion');
+                const response = await axios.get('http://localhost:5000/api/getallquestion', { withCredentials: true });
                 setQuestions(response.data); // Assuming response.data is an array of questions
             } catch (error) {
                 console.error('Error fetching data:', error);
@@ -27,41 +27,46 @@ function CodingQuestionForm() {
     }, []); // Empty dependency array ensures this effect runs only once when the component mounts
 
     const handleEdit = (question) => {
+        console.log("Question: is", question)
         setEditingQuestion(question);
-        setFormData({
-            questionName: question.questionName,
-            difficultyLevel: question.difficultyLevel,
-            url: question.url,
-            conceptType: question.conceptType
-        });
+        setFormData(question); // Set formData directly to the editing question
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        // Dummy action for testing
-        console.log('Form submitted with data:', formData);
-        // Update the question in the state
-        setQuestions(prevQuestions => {
-            return prevQuestions.map(question => {
-                if (question.id === editingQuestion.id) {
+        try {
+            const response = await axios.put(`http://localhost:5000/api/updatequestion/${editingQuestion._id}`, formData, { withCredentials: true });
+            console.log('Question updated:', response.data);
+            // Update the question in the state
+
+            setQuestions(prevQuestions => prevQuestions.map(question => {
+                if (question._id === editingQuestion._id) {
                     return { ...question, ...formData };
                 }
                 return question;
+            }));
+            // Clear editing state and form data
+            setEditingQuestion(null);
+            setFormData({
+                questionName: '',
+                difficultyLevel: '',
+                url: '',
+                conceptType: ''
             });
-        });
-        // Clear editing state and form data
-        setEditingQuestion(null);
-        setFormData({
-            questionName: '',
-            difficultyLevel: '',
-            url: '',
-            conceptType: ''
-        });
+        } catch (error) {
+            console.error('Error updating question:', error);
+        }
     };
 
-    const handleDelete = (id) => {
-        // Remove the question from the state
-        setQuestions(prevQuestions => prevQuestions.filter(question => question.id !== id));
+    const handleDelete = async (question) => {
+        try {
+            console.log(question);
+            await axios.delete(`http://localhost:5000/api/deletequestion/${question._id}`, { withCredentials: true });
+            // Remove the question from the state only after successful deletion
+            setQuestions(prevQuestions => prevQuestions.filter(q => q._id !== question._id));
+        } catch (error) {
+            console.error('Error deleting question:', error);
+        }
     };
 
     return (
@@ -88,7 +93,7 @@ function CodingQuestionForm() {
                                     <td className="py-3 px-4">{question.conceptType}</td>
                                     <td className="py-3 px-4">
                                         <button onClick={() => handleEdit(question)} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mr-2">Edit</button>
-                                        <button onClick={() => handleDelete(question.id)} className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">Delete</button>
+                                        <button onClick={() => handleDelete(question)} className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">Delete</button>
                                     </td>
                                 </tr>
                             ))}
@@ -172,7 +177,7 @@ function CodingQuestionForm() {
 const getColorClass = (difficultyLevel) => {
     switch (difficultyLevel) {
         case 'easy':
-            return 'bg-green-200';
+            return 'bg-green-400';
         case 'medium':
             return 'bg-yellow-200';
         case 'hard':

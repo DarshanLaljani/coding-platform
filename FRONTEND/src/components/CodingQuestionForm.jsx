@@ -30,7 +30,8 @@ function CodingQuestionForm() {
 
         try {
             // Send form data to the backend API
-            const response = await axios.post('http://localhost:5000/api/codingQuestions', formData);
+            const response = await axios.post('http://localhost:5000/api/codingQuestions', formData, { withCredentials: true });
+            console.log(response);
 
             // If the request is successful, show a toast notification
             if (response.status === 200) {

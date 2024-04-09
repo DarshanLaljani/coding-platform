@@ -3,6 +3,7 @@ import * as React from 'react';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom'; // Import useHistory hook
 import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
 import Link from '@mui/material/Link';
@@ -13,7 +14,6 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { useState } from 'react';
-import { responsiveProperty } from '@mui/material/styles/cssUtils';
 
 function Copyright(props) {
     return (
@@ -33,6 +33,15 @@ function Copyright(props) {
 const defaultTheme = createTheme();
 
 export default function SignUp() {
+    const navigateTo = useNavigate(); // Initialize useHistory
+
+    // Function to handle "Practice" button click
+    const handleLogin = () => {
+        // Navigate to the '/practice' route
+        navigateTo('/login');
+    };
+
+
 
     const [successMessage, setSuccessMessage] = useState('')
     const [error, setErrorMessage] = useState('');
@@ -58,7 +67,7 @@ export default function SignUp() {
         console.log(formData)
         const response = await axios.post('http://localhost:5000/api/register', formData)
             .then(() => {
-                setSuccessMessage("Data Saved Successfully")
+                setSuccessMessage("Registered Successfully")
                 // Clear success message after 2 seconds
                 setTimeout(() => {
                     setSuccessMessage('');
@@ -69,10 +78,14 @@ export default function SignUp() {
                     email: '',
                     password: ''
                 });
+
+                setTimeout(() => {
+                    handleLogin();
+                }, 3000);
             })
             .catch((error) => {
                 // If there's an error, show an error toast notification
-                setErrorMessage("Failed to save data")
+                setErrorMessage("Failed to Register")
                 console.log(error);
                 // Clear success message after 2 seconds
                 setTimeout(() => {

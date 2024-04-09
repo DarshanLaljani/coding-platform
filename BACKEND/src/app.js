@@ -1,6 +1,7 @@
 const express = require('express');
 const dotenv = require('dotenv');
 const cors = require('cors');
+const cookieParser = require('cookie-parser');
 dotenv.config();
 
 const connectDB = require('../config/connectDB');
@@ -8,8 +9,8 @@ const connectDB = require('../config/connectDB');
 const app = express();
 `   `
 // Enable CORS middleware
-app.use(cors());
-
+app.use(cors({ origin: true, credentials: true }));
+app.use(cookieParser());
 connectDB();
 
 
