@@ -14,11 +14,9 @@ import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { useState } from 'react';
 import { useContext } from 'react';
-import { UserContext } from '../App';
 import Cookies from 'js-cookie'
 function Copyright(props) {
 
-    const { state, dispatch } = useContext(UserContext)
     return (
         <Typography variant="body2" color="text.secondary" align="center" {...props}>
             {'Copyright © '}
@@ -45,6 +43,7 @@ export default function SignIn() {
     };
 
     const [successMessage, setSuccessMessage] = useState('')
+
     const [error, setErrorMessage] = useState('');
 
     const [formData, setFormData] = useState({
@@ -67,10 +66,8 @@ export default function SignIn() {
         try {
             const response = await axios.post('http://localhost:5000/api/login', formData, { withCredentials: true })
 
-
-            Cookies.set("access", response.data['accessToken'])
+            // loggedIn = true;
             setSuccessMessage("Logged in Successfully")
-
             // Clear success message after 2 seconds
             setTimeout(() => {
                 setSuccessMessage('');

@@ -9,7 +9,7 @@ import List from '@mui/material/List';
 import Typography from '@mui/material/Typography';
 import Divider from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton';
-import { useNavigate } from 'react-router-dom'; // Import useHistory hook
+import { useNavigate } from 'react-router-dom';
 import Container from '@mui/material/Container';
 import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
@@ -19,16 +19,19 @@ import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import MainListItems from './listItems';
 import { Button } from '@mui/material';
 import ProfileSection from "./ProfileSection";
-
+import Cookies from 'js-cookie'
+import { useEffect } from 'react';
+import axios from 'axios'
+import { useState } from 'react';
 
 const theme = createTheme({
   palette: {
     mode: 'dark',
     primary: {
-      main: '#6A1B9A', // Purple color
+      main: '#6A1B9A',
     },
     secondary: {
-      main: '#FF9800', // Orange color
+      main: '#FF9800',
     },
   },
 });
@@ -78,23 +81,38 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
 );
 
 export default function Home() {
-  const navigateTo = useNavigate(); // Initialize useHistory
+  const navigateTo = useNavigate();
+  const [userData, setUserData] = useState("");
 
-  // Function to handle "Practice" button click
-  const handleLogin = () => {
-    // Navigate to the '/practice' route
+  useEffect(() => {
+    const storedUserData = Cookies.get('userData');
+    if (storedUserData) {
+      setUserData(storedUserData);
+    }
+  }, []);
+
+  const handleLogin = async () => {
+    const response = await axios.get('http://localhost:5000/api/getuser');
+    Cookies.set('userData', response.data);
+
+    // setTimeout(() => {
     navigateTo('/login');
+    // }, 1000);
   };
 
   const handleRegister = () => {
-    // Navigate to the '/practice' route
     navigateTo('/register');
   };
 
   const handleLogout = () => {
-    // Navigate to the '/practice' route
+    setUserData("");
+    Cookies.remove('userData');
+
+    // setTimeout(() => {
     navigateTo('/logout');
+    // }, 1000);
   };
+
   const [open, setOpen] = React.useState(true);
 
   const toggleDrawer = () => {
@@ -105,7 +123,6 @@ export default function Home() {
     <ThemeProvider theme={theme}>
       <Box sx={{ display: 'flex' }}>
         <CssBaseline />
-
         <AppBar position="absolute" open={open}>
           <Toolbar
             sx={{
@@ -140,13 +157,19 @@ export default function Home() {
             </Box>
             <Box sx={{ display: 'flex', alignItems: 'center' }}>
               <Button sx={{ marginRight: '8px' }}>About Us</Button>
-              <Button onClick={handleLogin} sx={{ bgcolor: '#6A1B9A', marginRight: '8px' }} color="inherit">Log In</Button>
-              <Button onClick={handleRegister} sx={{ borderColor: '#6A1B9A', color: '#6A1B9A', marginRight: '8px' }} variant="outlined">Sign Up</Button>
-              <Button onClick={handleLogout} sx={{ borderColor: '#6A1B9A', color: '#6A1B9A', marginRight: '8px' }} variant="outlined">Logout</Button>
+              {userData === 'Hello' ? (
+                <>
+                  <Button onClick={handleLogout} sx={{ borderColor: '#6A1B9A', color: '#6A1B9A', marginRight: '8px' }} variant="outlined">Logout</Button>
+                </>
+              ) : (
+                <>
+                  <Button onClick={handleLogin} sx={{ bgcolor: '#6A1B9A', marginRight: '8px' }} color="inherit">Log In</Button>
+                  <Button onClick={handleRegister} sx={{ borderColor: '#6A1B9A', color: '#6A1B9A', marginRight: '8px' }} variant="outlined">Sign Up</Button>
+                </>
+              )}
             </Box>
           </Toolbar>
         </AppBar>
-
         <Drawer variant="permanent" open={open}>
           <Toolbar
             sx={{

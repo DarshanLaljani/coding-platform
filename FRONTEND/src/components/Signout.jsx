@@ -24,9 +24,9 @@ const SignOut = () => {
         }
     };
     return (
-        <div className="flex justify-center items-center h-screen bg-gradient-to-br from-blue-500 to-purple-600">
+        <div className="flex justify-center items-center h-screen bg-gradient-to-br from-black to-purple-800">
             <div className="bg-white bg-opacity-20 backdrop-blur-md rounded-lg p-8 max-w-md w-full space-y-4">
-                <h2 className="text-3xl font-bold text-center text-white">Sign Out</h2>
+                <h2 className="text-4xl font-bold text-center text-white">Sign Out</h2>
                 <p className="text-white text-center">Are you sure you want to sign out?</p>
                 <div className="flex justify-center">
                     <button onClick={handleSignOut} className="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded mr-4">
