@@ -27,5 +27,8 @@ router.put('/updatequestion/:id', updateQuestion);
 // Delete a coding question
 router.delete('/deletequestion/:id', deleteQuestion);
 
+router.get('/getuser', (req, res) => {
+    res.send('Hello');
+})
 
 module.exports = router;

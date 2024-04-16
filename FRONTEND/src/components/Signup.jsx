@@ -36,9 +36,9 @@ export default function SignUp() {
     const navigateTo = useNavigate(); // Initialize useHistory
 
     // Function to handle "Practice" button click
-    const handleLogin = () => {
+    const handleHome = () => {
         // Navigate to the '/practice' route
-        navigateTo('/login');
+        navigateTo('/');
     };
 
 
@@ -71,7 +71,7 @@ export default function SignUp() {
                 // Clear success message after 2 seconds
                 setTimeout(() => {
                     setSuccessMessage('');
-                }, 2000);
+                }, 500);
                 // You can reset the form fields here if needed
                 setFormData({
                     username: '',
@@ -80,8 +80,8 @@ export default function SignUp() {
                 });
 
                 setTimeout(() => {
-                    handleLogin();
-                }, 3000);
+                    handleHome();
+                }, 2000);
             })
             .catch((error) => {
                 // If there's an error, show an error toast notification
