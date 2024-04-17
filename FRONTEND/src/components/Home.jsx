@@ -17,7 +17,7 @@ import MainListItems from './listItems';
 import { Button } from '@mui/material';
 import ProfileSection from "./ProfileSection";
 import Cookies from 'js-cookie'
-import LogoImage from '../../public/logo.jpeg';
+import LogoImage from '../../public/image.png';
 import { useEffect } from 'react';
 import axios from 'axios'
 import { useState } from 'react';
@@ -220,7 +220,7 @@ export default function Home() {
 
             }}
           >
-            <source src="/video3.mp4" type="video/mp4" />
+            <source src="/video.mp4" type="video/mp4" />
           </video>
           <div
             style={{
