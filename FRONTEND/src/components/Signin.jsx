@@ -100,14 +100,14 @@ export default function SignIn() {
     return (
         <ThemeProvider theme={defaultTheme}>
             <Container component="main" maxWidth="xs" sx={{ border: '1px solid white', borderRadius: '8px', padding: '16px' }}>
-               
+
                 <Box
                     sx={{
                         marginTop: 8,
                         display: 'flex',
                         flexDirection: 'column',
                         alignItems: 'center',
-                        color:'white'
+                        color: 'white'
                     }}
                 >
                     <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
@@ -130,7 +130,7 @@ export default function SignIn() {
                             value={formData.email}
                             onChange={handleChange}
                             InputLabelProps={{ style: { color: 'white' } }}
-                            sx={{ border: '1px solid white', borderRadius: '8px' , color:'white'}}
+                            sx={{ border: '1px solid white', borderRadius: '8px', color: 'white' }}
                             autoFocus
                         />
                         <TextField
@@ -143,7 +143,7 @@ export default function SignIn() {
                             type="password"
                             onChange={handleChange}
                             value={formData.password}
-                            sx={{ border: '1px solid white', borderRadius: '8px' , color:'white'}}
+                            sx={{ border: '1px solid white', borderRadius: '8px', color: 'white' }}
                             id="password"
 
                         />
