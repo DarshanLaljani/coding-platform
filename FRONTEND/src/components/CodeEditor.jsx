@@ -21,7 +21,7 @@ const CodeEditor = () => {
   };
 
   return (
-    <Box minH="100vh" bg="#0f0a19" color="gray.500" px={6} py={8}>
+    <Box minH="100vh" bg="linear-gradient(to right, #660066, #000000)" color="gray.500" px={6} py={8}>
       <HStack spacing={4}>
         <Box w="50%">
           <LanguageSelector language={language} onSelect={onSelect} />

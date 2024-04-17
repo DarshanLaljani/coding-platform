@@ -3,7 +3,7 @@ import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import { useNavigate } from 'react-router-dom'; // Import useHistory hook
 import axios from 'axios';
-import CssBaseline from '@mui/material/CssBaseline';
+
 import TextField from '@mui/material/TextField';
 import Link from '@mui/material/Link';
 import Grid from '@mui/material/Grid';
@@ -18,10 +18,10 @@ import Cookies from 'js-cookie'
 function Copyright(props) {
 
     return (
-        <Typography variant="body2" color="text.secondary" align="center" {...props}>
+        <Typography variant="body2" color="white" align="center" {...props}>
             {'Copyright © '}
             <Link color="inherit" href="https://mui.com/">
-                Your Website
+                Code Boost
             </Link>{' '}
             {new Date().getFullYear()}
             {'.'}
@@ -99,14 +99,15 @@ export default function SignIn() {
 
     return (
         <ThemeProvider theme={defaultTheme}>
-            <Container component="main" maxWidth="xs">
-                <CssBaseline />
+            <Container component="main" maxWidth="xs" sx={{ border: '1px solid white', borderRadius: '8px', padding: '16px' }}>
+               
                 <Box
                     sx={{
                         marginTop: 8,
                         display: 'flex',
                         flexDirection: 'column',
                         alignItems: 'center',
+                        color:'white'
                     }}
                 >
                     <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
@@ -128,6 +129,8 @@ export default function SignIn() {
                             name="email"
                             value={formData.email}
                             onChange={handleChange}
+                            InputLabelProps={{ style: { color: 'white' } }}
+                            sx={{ border: '1px solid white', borderRadius: '8px' , color:'white'}}
                             autoFocus
                         />
                         <TextField
@@ -136,9 +139,11 @@ export default function SignIn() {
                             fullWidth
                             name="password"
                             label="Password"
+                            InputLabelProps={{ style: { color: 'white' } }}
                             type="password"
                             onChange={handleChange}
                             value={formData.password}
+                            sx={{ border: '1px solid white', borderRadius: '8px' , color:'white'}}
                             id="password"
 
                         />

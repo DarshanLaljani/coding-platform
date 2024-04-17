@@ -60,8 +60,8 @@ function CodingQuestionForm() {
     };
 
     return (
-        <div className="flex justify-center items-center h-screen bg-gradient-to-r from-blue-400 to-yellow-500">
-            <div className="bg-white bg-opacity-20 p-10 rounded-lg shadow-lg">
+        <div className="flex justify-center items-center h-screen" style={{ background: 'linear-gradient(to bottom, #000000 0%, #660066 100%)' }}>
+            <div className="bg-black p-10 rounded-lg shadow-lg">
                 {error && <p className="mb-2 text-center text-red-600 text-lg font-bold">{error}</p>}
                 {successMessage && <p className="mb-2 text-center text-green-600 text-lg font-bold">{successMessage}</p>}
                 <h2 className="text-5xl font-bold mb-4 text-center text-white">Coding Question Form</h2>
@@ -112,7 +112,7 @@ function CodingQuestionForm() {
                         />
                     </div>
                     <div className="mb-4 flex justify-center">
-                        <button className="w-60 py-2 bg-blue-500 hover:bg-blue-600 text-white rounded-md transition duration-300" type="submit">Submit</button>
+                        <button className="w-60 py-2 bg-purple-800 hover:bg-purple-600 text-white rounded-md transition duration-300" type="submit">Submit</button>
                     </div>
                     {/* <button className="w-60 py-2 bg-blue-500 hover:bg-blue-600 text-white rounded-md transition duration-300" type="submit">Submit</button> */}
                 </form>

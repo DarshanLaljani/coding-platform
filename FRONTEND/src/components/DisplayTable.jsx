@@ -70,7 +70,7 @@ function CodingQuestionForm() {
     };
 
     return (
-        <div className="flex justify-center items-center h-screen bg-gradient-to-br from-green-400 to-blue-500">
+        <div className="flex justify-center items-center h-screen bg-gradient-to-br from-purple-900 to-black">
             <div className="max-w-7xl w-full bg-white bg-opacity-80 shadow-lg rounded-lg overflow-hidden p-6 text-gray-800">
                 <h2 className="text-center text-2xl font-semibold mb-6">Predefined Questions</h2>
                 <div className="overflow-x-auto">

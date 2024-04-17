@@ -31,8 +31,8 @@ const Output = ({ editorRef, language }) => {
 
   return (
     <Box w="50%">
-      <Text mb={2} fontSize="lg">
-        Output
+      <Text mb={2} fontSize="lg" color="blue.500">
+        Output:
       </Text>
       <Button
         variant="outline"
@@ -46,13 +46,13 @@ const Output = ({ editorRef, language }) => {
       <Box
         height="75vh"
         p={2}
-        color={isError ? "red.400" : ""}
-        border="1px solid"
+        color={isError ? "red.400" : "white"}
+        border="2px solid"
         borderRadius={4}
-        borderColor={isError ? "red.500" : "#333"}
+        borderColor={isError ? "red.500" : "white"}
       >
         {output
-          ? output.map((line, i) => <Text key={i}>{line}</Text>)
+          ? output.map((line, i) => <Text color="white" key={i}>{line}</Text>)
           : 'Click "Run Code" to see the output here'}
       </Box>
     </Box>

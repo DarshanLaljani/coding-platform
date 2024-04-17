@@ -10,6 +10,7 @@ import SignUp from "./components/Signup";
 import { createContext, useReducer } from "react";
 import { reducer, initialState } from "./reducer/UserReducer";
 import SignOut from "./components/Signout";
+import Community from "./components/Community";
 
 function App() {
   return (
@@ -24,7 +25,7 @@ function App() {
           <Route path="/aboutus" element={<CodeEditor />} />
           <Route path="/addquestion" element={<CodingQuestionForm />} />
           <Route path="/questionbank" element={<DisplayTable />} />
-          <Route path="/community" element={< Title />} />
+          <Route path="/community" element={< Community />} />
         </Routes>
       </div>
     </Router>
