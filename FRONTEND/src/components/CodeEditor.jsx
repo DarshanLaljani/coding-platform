@@ -1,9 +1,11 @@
 import { useRef, useState } from "react";
-import { Box, HStack } from "@chakra-ui/react";
+import { Box, HStack, MenuButton } from "@chakra-ui/react";
 import { Editor } from "@monaco-editor/react";
 import LanguageSelector from "./LanguageSelector";
 import { CODE_SNIPPETS } from "../constants";
 import Output from "./Output";
+
+
 
 const CodeEditor = () => {
   const editorRef = useRef();
@@ -21,7 +23,8 @@ const CodeEditor = () => {
   };
 
   return (
-    <Box minH="100vh" bg="linear-gradient(to right, #660066, #000000)" color="gray.500" px={6} py={8}>
+    <Box minH="100vh" bg="linear-gradient(to bottom, #000000, #6A1B9A)" color="gray.800" px={6} py={8}>
+
       <HStack spacing={4}>
         <Box w="50%">
           <LanguageSelector language={language} onSelect={onSelect} />

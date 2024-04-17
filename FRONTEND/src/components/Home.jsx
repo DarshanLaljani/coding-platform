@@ -11,15 +11,13 @@ import Divider from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton';
 import { useNavigate } from 'react-router-dom';
 import Container from '@mui/material/Container';
-import Grid from '@mui/material/Grid';
-import Paper from '@mui/material/Paper';
-import Link from '@mui/material/Link';
 import MenuIcon from '@mui/icons-material/Menu';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import MainListItems from './listItems';
 import { Button } from '@mui/material';
 import ProfileSection from "./ProfileSection";
 import Cookies from 'js-cookie'
+import LogoImage from '../../public/logo.jpeg';
 import { useEffect } from 'react';
 import axios from 'axios'
 import { useState } from 'react';
@@ -145,29 +143,35 @@ export default function Home() {
               >
                 <MenuIcon />
               </IconButton>
-              <Typography
-                component="h1"
-                variant="h6"
-                color="inherit"
-                noWrap
-                sx={{ flexGrow: 1 }}
-              >
-                Code Boost
-              </Typography>
+              <div style={{ display: 'flex', alignItems: 'center' }}>
+                <img src={LogoImage} alt="Logo" style={{ marginRight: '0.5rem', width: '40px', height: '40px' }} />
+                <Typography
+                  component="h1"
+                  variant="h6"
+                  color="inherit"
+                  noWrap
+                  fontWeight="bold"
+                  sx={{ flexGrow: 1 }}
+                >
+                  Code Boost
+                </Typography>
+              </div>
             </Box>
             <Box sx={{ display: 'flex', alignItems: 'center' }}>
-              <Button sx={{ marginRight: '8px' }}>About Us</Button>
+              <Button sx={{ marginRight: '8px', fontWeight: 'bold', color: 'white ' }}>About Us</Button>
               {userData === 'Hello' ? (
                 <>
                   <Button onClick={handleLogout} sx={{ borderColor: '#6A1B9A', color: '#6A1B9A', marginRight: '8px' }} variant="outlined">Logout</Button>
                 </>
               ) : (
                 <>
-                  <Button onClick={handleLogin} sx={{ bgcolor: '#6A1B9A', marginRight: '8px' }} color="inherit">Log In</Button>
-                  <Button onClick={handleRegister} sx={{ borderColor: '#6A1B9A', color: '#6A1B9A', marginRight: '8px' }} variant="outlined">Sign Up</Button>
+                  <Button onClick={handleLogin} sx={{ bgcolor: '#6A1B9A', marginRight: '8px', fontWeight: 'bold' }} color="inherit">Log In</Button>
+                  <Button onClick={handleRegister} sx={{ borderColor: '#6A1B9A', color: 'white', marginRight: '8px', fontWeight: 'bold' }} variant="outlined">Sign Up</Button>
                 </>
               )}
+
             </Box>
+
           </Toolbar>
         </AppBar>
         <Drawer variant="permanent" open={open}>
@@ -188,78 +192,51 @@ export default function Home() {
             <MainListItems />
           </List>
         </Drawer>
-        <Box
-          component="main"
+
+        <Container
           sx={{
-            backgroundColor: (theme) =>
-              theme.palette.mode === 'light'
-                ? theme.palette.grey[100]
-                : theme.palette.grey[900],
-            flexGrow: 1,
-            minHeight: 0,
-            overflow: 'auto',
+            height: '100vh',
+            width: '100vw',
+            display: 'flex',
+            alignItems: 'center',
+            // backgroundImage: 'url(/image.png)',
+            justifyContent: 'center',
+            // backgroundSize: 'cover',
+            overflow: 'hidden',
+            transition: 'margin-left 225ms cubic-bezier(0, 0, 0.2, 1) 0ms',
+            position: 'relative',
+
           }}
         >
-          <Toolbar />
-          <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
-            <Grid container spacing={3}>
-              <Grid item xs={12}>
-                <Paper
-                  sx={{
-                    p: 4,
-                    display: 'flex',
-                    flexDirection: 'row',
-                    justifyContent: 'space-between',
-                    alignItems: 'center',
-                    marginBottom: 2,
-                  }}
-                >
-                  <ProfileSection />
-                </Paper>
-              </Grid>
-              <Grid item xs={12} md={8} lg={9}>
-                <Paper
-                  sx={{
-                    p: 2,
-                    display: 'flex',
-                    flexDirection: 'column',
-                    height: 280,
-                  }}
-                >
-                  {/* <Chart 
-                /> */}
-                </Paper>
-              </Grid>
-              <Grid item xs={12} md={4} lg={3}>
-                <Paper
-                  sx={{
-                    p: 2,
-                    display: 'flex',
-                    flexDirection: 'column',
-                    height: 280,
-                  }}
-                >
-                  {/* <Deposits /> */}
-                </Paper>
-              </Grid>
-              <Grid item xs={12}>
-                <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' }}>
-                  {/* <PieChart /> */}
-                </Paper>
-              </Grid>
-            </Grid>
-            <Box sx={{ pt: 4 }}>
-              <Typography variant="body2" color="text.secondary" align="center">
-                {'Copyright © '}
-                <Link color="inherit" href="https://mui.com/">
-                  Code First
-                </Link>{' '}
-                {new Date().getFullYear()}
-                {'.'}
-              </Typography>
-            </Box>
-          </Container>
-        </Box>
+          <video
+            autoPlay
+            loop
+            muted
+            style={{
+              position: 'absolute',
+              maxwidth: '100vw',
+              maxHeight: '100vh',
+              objectFit: 'cover'
+
+            }}
+          >
+            <source src="/video3.mp4" type="video/mp4" />
+          </video>
+          <div
+            style={{
+              position: 'absolute',
+              top: '50%',
+              left: '50%',
+              transform: 'translate(-50%, -50%)',
+              textAlign: 'center',
+              color: 'white', // Set text color
+            }}
+          >
+            <h1 style={{ fontSize: '5rem', marginBottom: '0.5rem', fontWeight: "bolder" }}>CODE BOOST</h1>
+            <h2 style={{ fontSize: '1.5rem' }}>Enhance your coding journey</h2>
+          </div>
+        </Container>
+
       </Box>
     </ThemeProvider>
   );

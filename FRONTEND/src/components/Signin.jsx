@@ -3,7 +3,6 @@ import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import { useNavigate } from 'react-router-dom'; // Import useHistory hook
 import axios from 'axios';
-
 import TextField from '@mui/material/TextField';
 import Link from '@mui/material/Link';
 import Grid from '@mui/material/Grid';
@@ -11,10 +10,9 @@ import Box from '@mui/material/Box';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
+import CottageIcon from '@mui/icons-material/Cottage';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { useState } from 'react';
-import { useContext } from 'react';
-import Cookies from 'js-cookie'
 function Copyright(props) {
 
     return (
@@ -99,11 +97,13 @@ export default function SignIn() {
 
     return (
         <ThemeProvider theme={defaultTheme}>
-            <Container component="main" maxWidth="xs" sx={{ border: '1px solid white', borderRadius: '8px', padding: '16px' }}>
+            <a href="/"><Button><CottageIcon sx={{ fontSize: 50 }} style={{ marginLeft: '1rem', marginTop: '1rem' }} /></Button></a>
+            <Container component="main" maxWidth="xs" sx={{ border: '1px solid white', borderRadius: '8px', padding: '16px', marginTop: '3rem' }}>
+
 
                 <Box
                     sx={{
-                        marginTop: 8,
+
                         display: 'flex',
                         flexDirection: 'column',
                         alignItems: 'center',

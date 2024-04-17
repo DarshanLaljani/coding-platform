@@ -35,12 +35,6 @@ const MainListItems = () => {
 
   return (
     <>
-      <ListItemButton>
-        <ListItemIcon>
-          <DashboardIcon />
-        </ListItemIcon>
-        <ListItemText primary="Dashboard" />
-      </ListItemButton>
       <ListItemButton onClick={handleCommunityClick}>
         <ListItemIcon>
           <PeopleIcon />

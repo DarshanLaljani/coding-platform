@@ -3,7 +3,7 @@ const router = express.Router();
 const { addCodingQuestion, getAllQuestions, updateQuestion, deleteQuestion } = require('../controller/codingController');
 const userController = require('../controller/userController');
 const { authenticateToken } = require('../middleware/authenticUser');
-
+const postController = require('../controller/postController');
 // Route to add a new coding question
 router.post('/codingQuestions', authenticateToken, addCodingQuestion);
 
@@ -30,5 +30,9 @@ router.delete('/deletequestion/:id', deleteQuestion);
 router.get('/getuser', (req, res) => {
     res.send('Hello');
 })
+
+router.post('/posts', postController.createPost);
+
+router.get('/posts', postController.getAllPosts);
 
 module.exports = router;

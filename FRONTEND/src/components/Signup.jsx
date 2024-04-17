@@ -12,6 +12,7 @@ import Box from '@mui/material/Box';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
+import CottageIcon from '@mui/icons-material/Cottage';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { useState } from 'react';
 
@@ -96,6 +97,7 @@ export default function SignUp() {
 
     return (
         <ThemeProvider theme={defaultTheme}>
+            <a href="/"><Button><CottageIcon sx={{ fontSize: 50 }} style={{ marginLeft: '1rem', marginTop: '1rem' }} /></Button></a>
             <Container component="main" maxWidth="xs">
 
                 <CssBaseline />

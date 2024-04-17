@@ -1,24 +1,63 @@
-import * as React from 'react';
-import { ChakraProvider, Button, FormControl, FormLabel, Input, Modal, ModalOverlay, ModalContent, ModalHeader, ModalFooter, ModalBody, ModalCloseButton, useDisclosure, VStack, Text, Flex, Spacer, SimpleGrid, Avatar } from '@chakra-ui/react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import {
+  ChakraProvider,
+  Button,
+  FormControl,
+  FormLabel,
+  Input,
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalFooter,
+  ModalBody,
+  ModalCloseButton,
+  useDisclosure,
+  VStack,
+  Text,
+  Flex,
+  Spacer,
+  SimpleGrid,
+  Avatar
+} from '@chakra-ui/react';
 import { Link } from 'react-router-dom';
 
 function Community() {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const [posts, setPosts] = React.useState([]);
-  const [title, setTitle] = React.useState('');
-  const [description, setDescription] = React.useState('');
-  const [name, setName] = React.useState('');
+  const [posts, setPosts] = useState([]);
+  const [title, setTitle] = useState('');
+  const [description, setDescription] = useState('');
+  const [name, setName] = useState('');
   const initialRef = React.useRef(null);
   const finalRef = React.useRef(null);
 
-  const handlePost = () => {
-    if (title && description && name) {
-      const newPost = { title, description, name, timestamp: new Date().toLocaleString() };
-      setPosts([...posts, newPost]);
+  useEffect(() => {
+    const fetchPosts = async () => {
+      try {
+        const response = await axios.get('http://localhost:5000/api/posts');
+        setPosts(response.data);
+      } catch (error) {
+        console.error('Error fetching posts:', error);
+      }
+    };
+    fetchPosts();
+  }, []);
+
+  const handlePost = async () => {
+    try {
+      const response = await axios.post('http://localhost:5000/api/posts', {
+        name,
+        title,
+        description
+      });
+      setPosts([...posts, response.data]);
       setTitle('');
       setDescription('');
       setName('');
       onClose();
+    } catch (error) {
+      console.error('Error creating post:', error);
     }
   };
 
@@ -29,7 +68,7 @@ function Community() {
           <Text fontSize={32}> Community Page</Text>
           <Spacer />
           <Button onClick={onOpen} mr={4}>Post</Button>
-          <a href="/  "><Button>Home</Button></a>
+          <Link to="/"><Button>Home</Button></Link>
         </Flex>
 
         <Modal
